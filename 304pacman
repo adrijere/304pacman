@@ -1,0 +1,49 @@
+#!/usr/bin/env python2.7
+# -*- coding: utf-8 -*-
+
+import sys
+from math import *
+
+wall = '+'
+space = ' '
+
+def parsing_file(tmp):
+   global wall, space
+   x = 0
+   _map = []
+   for line in tmp:
+      _map.append([])
+      for char in line:
+         if (char == '1'):
+            _map[x].append(wall)
+         elif (char == '0'):
+            _map[x].append(space)
+         elif (char == 'P'):
+            _map[x].append('P')
+         elif (char == 'F'):
+            _map[x].append('F')
+      x += 1
+   return _map
+
+def print_map(_map):
+   for x in _map:
+      print ''.join(x)
+
+def     main():
+   global wall, space
+   try:
+      file = open(sys.argv[1])
+      tmp = file.readlines()
+   except:
+      print "file not valid"
+      return 84
+   try:
+      wall = sys.argv[2]
+      space = sys.argv[3]
+      _map = parsing_file(tmp)
+   except:
+      print "Error argv"
+      return 84
+   print_map(_map)
+if __name__ == '__main__':
+   sys.exit(main())
